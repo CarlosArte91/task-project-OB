@@ -6,3 +6,13 @@ h1 {
 	font-weight: bold;
 	color: cadetblue;
 }
+
+.task-action {
+	cursor: pointer;
+	color: green;
+}
+
+.task-action-delete {
+	cursor: pointer;
+	color: tomato;
+}

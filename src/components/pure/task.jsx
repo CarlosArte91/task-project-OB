@@ -6,7 +6,7 @@ import { Task } from "../../models/task.class";
 // Importar hoja de estilos
 import '../../styles/task.scss';
 
-function TaskComponent({ task }) {
+function TaskComponent({ task, complete, deleted }) {
 
 	const taskLevelBadge = () => {
 		switch (task.level) {
@@ -43,7 +43,9 @@ function TaskComponent({ task }) {
 	};
 
 	const taskIconCompleted = () => {
-		return task.completed ? <i className='bi-toggle-on' style={{color: 'green'}}></i> : <i className='bi-toggle-off'></i>
+		return task.completed ? (
+			<i onClick={() => complete(task)} className='bi-toggle-on task-action'></i>
+		) : <i onClick={() => complete(task)} className='bi-toggle-off task-action'></i>
 	};
 
   return (
@@ -62,14 +64,16 @@ function TaskComponent({ task }) {
 
 			<td className='aling-middle'>
 				{ taskIconCompleted() }
-				<i className='bi-trash' style={{color: 'tomato'}}></i>
+				<i onClick={() => deleted(task)} className='bi-trash task-action-delete'></i>
 			</td>
 		</tr>
   );
 };
 
 TaskComponent.propTypes = {
-  task: PropTypes.instanceOf(Task),
+  task: PropTypes.instanceOf(Task).isRequired,
+	complete: PropTypes.func.isRequired,
+	deleted: PropTypes.func.isRequired,
 };
 
 export default TaskComponent;

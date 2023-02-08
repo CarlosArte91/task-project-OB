@@ -16,6 +16,20 @@ function TaskList() {
 
 	const [tasks, setTasks] = useState(taskArray);
 
+	const completeTask = (task) => {
+		const index = tasks.indexOf(task);
+		const tempTasks = [...tasks];
+		tempTasks[index].completed = !tempTasks[index].completed;
+
+		setTasks(tempTasks);
+	};
+
+	const deleteTask = (task) => {
+		const tempTasks = tasks.filter((item) => item !== task);
+
+		setTasks(tempTasks);
+	};
+
   return (
     <div>
 			<div className='col-12'>
@@ -36,7 +50,7 @@ function TaskList() {
 							</thead>
 
 							<tbody>
-								{tasks.map((task, index) => <TaskComponent key={index} task={task} />)}
+								{tasks.map((task, index) => <TaskComponent key={index} task={task} complete={completeTask} deleted={deleteTask} />)}
 							</tbody>
 						</table>
 					</div>
