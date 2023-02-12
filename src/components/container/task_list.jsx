@@ -20,13 +20,17 @@ function TaskList() {
 		const index = tasks.indexOf(task);
 		const tempTasks = [...tasks];
 		tempTasks[index].completed = !tempTasks[index].completed;
-
 		setTasks(tempTasks);
 	};
 
 	const deleteTask = (task) => {
 		const tempTasks = tasks.filter((item) => item !== task);
+		setTasks(tempTasks);
+	};
 
+	const addTask = (task) => {
+		const tempTasks = [...tasks];
+		tempTasks.push(task)
 		setTasks(tempTasks);
 	};
 
@@ -56,7 +60,7 @@ function TaskList() {
 					</div>
 				</div>
 			</div>
-			<TaskForm />
+			<TaskForm add={addTask} />
     </div>
   );
 };
