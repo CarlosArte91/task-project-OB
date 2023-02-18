@@ -16,3 +16,35 @@ h1 {
 	cursor: pointer;
 	color: tomato;
 }
+
+.task-completed {
+	color: gray;
+	text-decoration: line-through;
+	font-weight: bold;
+}
+
+.task-pending {
+	font-weight: bold;
+	color: tomato;
+}
+
+.normal-style {
+	font-weight: bold;
+	color: blue;
+}
+
+.urgent-style {
+	font-weight: bold;
+	color: yellow;
+}
+
+.blocking-style {
+	font-weight: bold;
+	color: tomato;
+}
+
+.loading-style {
+	color: gray;
+	font-size: 30px;
+	font-weight: bold;
+}

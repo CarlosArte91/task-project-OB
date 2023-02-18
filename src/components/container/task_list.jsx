@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Task } from '../../models/task.class';
 import { LEVEL } from '../../models/level.enum';
 import TaskComponent from '../pure/task';
@@ -15,6 +15,7 @@ function TaskList() {
 	const taskArray = [defaultTask1, defaultTask2, defaultTask3];
 
 	const [tasks, setTasks] = useState(taskArray);
+	const [loading, setLoading] = useState(true);
 
 	const completeTask = (task) => {
 		const index = tasks.indexOf(task);
@@ -34,6 +35,44 @@ function TaskList() {
 		setTasks(tempTasks);
 	};
 
+	// Componentes de renderizado condicional
+	const Table = () => {
+		return (
+			<table>
+				<thead>
+					<tr>
+						<th scope='col'>Title</th>
+						<th scope='col'>Description</th>
+						<th scope='col'>Level</th>
+						<th scope='col'>Actions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{tasks.map((task, index) => <TaskComponent key={index} task={task} complete={completeTask} deleted={deleteTask} />)}
+				</tbody>
+			</table>
+		);
+	};
+
+	let taskTable;
+
+	if (tasks.length) taskTable = <Table />
+	else taskTable = (
+		<div>
+			<h3>There are not tasks to show</h3>
+			<h4>Please, create one</h4>
+		</div>
+	);
+
+	useEffect(() => {
+		const timeOut = setTimeout(() => setLoading(false), 2000);
+
+		return () => {
+			clearTimeout(timeOut);
+		};
+	}, []);
+
   return (
     <div>
 			<div className='col-12'>
@@ -43,24 +82,11 @@ function TaskList() {
 					</div>
 
 					<div className='card-body' data-mdb-perfect-scrollbar='true' style={{position: 'relative', height: '400px'}}>
-						<table>
-							<thead>
-								<tr>
-									<th scope='col'>Title</th>
-									<th scope='col'>Description</th>
-									<th scope='col'>Level</th>
-									<th scope='col'>Actions</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								{tasks.map((task, index) => <TaskComponent key={index} task={task} complete={completeTask} deleted={deleteTask} />)}
-							</tbody>
-						</table>
+						{loading ? <p className='loading-style'>Loading tasks...</p> : taskTable}
 					</div>
 				</div>
 			</div>
-			<TaskForm add={addTask} />
+			<TaskForm add={addTask} length={tasks.length}/>
     </div>
   );
 };

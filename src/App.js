@@ -1,10 +1,10 @@
 import './App.css';
-import TaskList from './components/container/task_list';
+import HomePage from './pages/home/home_page';
 
 function App() {
   return (
     <div className="App">
-			<TaskList />
+			<HomePage />
     </div>
   );
 }
