@@ -1,8 +1,8 @@
 import { LEVEL } from './level.enum';
 
 export class Task {
-  name = '';
-  description = '';
+  name = "";
+  description = "";
   completed = false;
   level = LEVEL.NORMAL;
 
