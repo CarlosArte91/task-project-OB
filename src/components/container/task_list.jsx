@@ -5,7 +5,7 @@ import TaskComponent from '../pure/task';
 
 // Importar hoja de estilos
 import '../../styles/task.scss';
-import TaskForm from '../pure/forms/task_form';
+import TaskForm from '../forms/task_form/task_form';
 
 function TaskList() {
   const defaultTask1 = new Task('Example 1', 'default description 1', true, LEVEL.NORMAL);
