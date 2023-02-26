@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { LEVEL } from "../../models/level.enum";
 import { Task } from "../../models/task.class";
+import { Link } from "react-router-dom";
 
 // Importar hoja de estilos
 import '../../styles/task.scss';
@@ -51,7 +52,7 @@ function TaskComponent({ task, complete, deleted }) {
   return (
 		<tr className={`fw-normal ${task.completed ? "task-completed" : "task-pending"}`}>
 			<th>
-				<span className='ms-2' >{ task.name }</span>
+				<Link to={`/task/${task.name}`}><span className='ms-2' >{ task.name }</span></Link>
 			</th>
 
 			<td className='aling-middle'>
